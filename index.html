@@ -21,7 +21,7 @@
       const params = new URLSearchParams(window.location.search);
       const page = params.get('p'); 
 
-      // ▼ 新しく追加：イベントの時は「準備中」画面を出してここで止める！
+      // イベントの「準備中」表示設定
       if (page === 'event') {
         document.body.innerHTML = `
           <div style="text-align: center; margin-top: 100px; font-family: sans-serif;">
@@ -29,10 +29,10 @@
             <p style="color: #666; margin-top: 20px;">現在準備中です。<br>公開までもうしばらくお待ちください！</p>
           </div>
         `;
-        return; // ここで処理を終了（どこにも飛ばさない）
+        return;
       }
 
-      // 基本のURL
+      // 基本のURL（ホーム）
       let targetUrl = "https://missionparkour.hacomono.jp/home"; 
 
       if (page === 'reserve') {
@@ -44,9 +44,9 @@
       } else if (page === 'mypage') {
         // ③ マイページ
         targetUrl = "https://missionparkour.hacomono.jp/home"; 
-      } else if (page === 'contract') {
-        // ④ 契約・お手続きページ
-        targetUrl = "https://missionparkour.hacomono.jp/member/contracts"; 
+      } else if (page === 'cancel') {
+        // ④ キャンセル（予約確認）画面 ★ここを更新しました
+        targetUrl = "https://missionparkour.hacomono.jp/activity"; 
       }
 
       window.location.replace(targetUrl);
