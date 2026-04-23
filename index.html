@@ -2,33 +2,45 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>MISSION</title>
+  <title>MISSION TOKYO</title>
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 </head>
 <body>
+  <p style="text-align:center; margin-top:50px;">画面を移動しています...</p>
 
-<h2>予約</h2>
-<iframe src="https://missionparkour.hacomono.jp/reserve/schedule/3/3" width="100%" height="600"></iframe>
+  <script>
+    async function main() {
+      // ▼ LIFF IDセット済み！
+      await liff.init({ liffId: "2009741389-2a51KXi2" });
 
-<h2>会員証</h2>
-<canvas id="qrcode"></canvas>
+      if (!liff.isLoggedIn()) {
+        liff.login();
+        return;
+      }
 
-<script>
-async function main() {
-  await liff.init({ liffId: "2009741389-2a51KXi2" });
+      const params = new URLSearchParams(window.location.search);
+      const page = params.get('p'); 
 
-  if (!liff.isLoggedIn()) {
-    liff.login();
-    return;
-  }
+      let targetUrl = "https://missionparkour.hacomono.jp/home"; 
 
-  const profile = await liff.getProfile();
-  QRCode.toCanvas(document.getElementById('qrcode'), profile.userId);
-}
+      if (page === 'reserve') {
+        // ① 予約画面
+        targetUrl = "https://missionparkour.hacomono.jp/reserve/schedule/3/3"; 
+      } else if (page === 'qr') {
+        // ② 会員証（hacomono共通URLセット済み！）
+        targetUrl = "https://missionparkour.hacomono.jp/member/membership-card"; 
+      } else if (page === 'mypage') {
+        // ③ マイページ（hacomono共通URLセット済み！）
+        targetUrl = "https://missionparkour.hacomono.jp/home"; 
+      } else if (page === 'event') {
+        // ④ イベント（よく使われるURLを一旦入れています）
+        targetUrl = "https://missionparkour.hacomono.jp/reserve/space/list"; 
+      }
 
-main();
-</script>
+      window.location.replace(targetUrl);
+    }
 
+    main();
+  </script>
 </body>
 </html>
