@@ -10,7 +10,7 @@
 
   <script>
     async function main() {
-      // ▼ LIFF IDセット済み！
+      // LIFF IDセット済み
       await liff.init({ liffId: "2009741389-2a51KXi2" });
 
       if (!liff.isLoggedIn()) {
@@ -21,20 +21,24 @@
       const params = new URLSearchParams(window.location.search);
       const page = params.get('p'); 
 
+      // 基本のURL
       let targetUrl = "https://missionparkour.hacomono.jp/home"; 
 
       if (page === 'reserve') {
         // ① 予約画面
         targetUrl = "https://missionparkour.hacomono.jp/reserve/schedule/3/3"; 
       } else if (page === 'qr') {
-        // ② 会員証（hacomono共通URLセット済み！）
-        targetUrl = "https://missionparkour.hacomono.jp/member/membership-card"; 
-      } else if (page === 'mypage') {
-        // ③ マイページ（hacomono共通URLセット済み！）
+        // ② 会員証（ホームを開いて下のボタンを押してもらう）
         targetUrl = "https://missionparkour.hacomono.jp/home"; 
+      } else if (page === 'mypage') {
+        // ③ マイページ
+        targetUrl = "https://missionparkour.hacomono.jp/home"; 
+      } else if (page === 'contract') {
+        // ④ 契約・お手続きページ（hacomonoの標準URL）
+        targetUrl = "https://missionparkour.hacomono.jp/member/contracts"; 
       } else if (page === 'event') {
-        // ④ イベント（よく使われるURLを一旦入れています）
-        targetUrl = "https://missionparkour.hacomono.jp/reserve/space/list"; 
+        // イベント用（現在はホームに飛ぶ設定。URLが決まったらここを書き換えるだけ！）
+        targetUrl = "https://missionparkour.hacomono.jp/home"; 
       }
 
       window.location.replace(targetUrl);
