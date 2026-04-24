@@ -38,6 +38,9 @@
       if (page === 'reserve') {
         // ① 予約画面
         targetUrl = "https://missionparkour.hacomono.jp/reserve/schedule/3/3"; 
+      } else if (page === 'trial') {
+        // ★ 初回体験予約（ここを追加！）
+        targetUrl = "https://missionparkour.hacomono.jp/reserve/schedule/3/3?trial=true"; 
       } else if (page === 'qr') {
         // ② 会員証（ホームを開く）
         targetUrl = "https://missionparkour.hacomono.jp/home"; 
@@ -45,7 +48,7 @@
         // ③ マイページ
         targetUrl = "https://missionparkour.hacomono.jp/home"; 
       } else if (page === 'cancel') {
-        // ④ キャンセル（予約確認）画面 ★ここを更新しました
+        // ④ キャンセル（予約確認）画面
         targetUrl = "https://missionparkour.hacomono.jp/activity"; 
       }
 
